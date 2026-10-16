@@ -112,37 +112,37 @@
 ## 🏗️ Architecture
 
 ```mermaid
-graph TD
-    subgraph Frontend ["Frontend (React 19 + TypeScript + Vite)"]
-        UI[Tailwind UI & Glassmorphism Dashboard]
-        ClusterMap[SVG Topic Cluster Visualizer]
-        Studio[Split-Pane Markdown & HTML Studio]
-        AuditWidget[Live SEO & Readability Gauge]
-        SettingsUI[Multi-Model Config & Theme Engine]
+flowchart TD
+    subgraph Frontend ["Frontend - React 19, TypeScript and Vite"]
+        UI["Tailwind UI and Glassmorphism Dashboard"]
+        ClusterMap["SVG Topic Cluster Visualizer"]
+        Studio["Split-Pane Markdown and HTML Studio"]
+        AuditWidget["Live SEO and Readability Gauge"]
+        SettingsUI["Multi-Model Config and Theme Engine"]
     end
 
-    subgraph Backend ["Backend API (Flask + SQLAlchemy)"]
-        API[RESTful Endpoints /api/*]
-        SEOEngine[Deterministic SEO & Readability Engine]
-        AIService[AI Service Router]
-        DB[(SQLite: rankcraft.db)]
+    subgraph Backend ["Backend API - Flask and SQLAlchemy"]
+        API["RESTful API Endpoints"]
+        SEOEngine["Deterministic SEO and Readability Engine"]
+        AIService["AI Service Router"]
+        DB[("SQLite Database - rankcraft.db")]
     end
 
-    subgraph AIProviders ["AI Providers & Fallback"]
-        Gemini[Google Gemini 1.5 Flash / Pro]
-        OpenAI[OpenAI GPT-4o / GPT-4o-mini]
-        Fallback[Built-In Heuristic Content Engine]
+    subgraph AIProviders ["AI Providers and Heuristics"]
+        Gemini["Google Gemini 1.5 Flash / Pro"]
+        OpenAI["OpenAI GPT-4o / GPT-4o-mini"]
+        Fallback["Built-In Heuristic Content Engine"]
     end
 
-    UI -->|HTTP / CORS| API
-    ClusterMap -->|Fetch / Mutate| API
-    Studio -->|Autosave & Assist| API
-    AuditWidget -->|Audit Payload| SEOEngine
+    UI --> API
+    ClusterMap --> API
+    Studio --> API
+    AuditWidget --> SEOEngine
     API --> DB
     API --> AIService
-    AIService -->|Configured Key| Gemini
-    AIService -->|Configured Key| OpenAI
-    AIService -->|No Key / Offline| Fallback
+    AIService --> Gemini
+    AIService --> OpenAI
+    AIService --> Fallback
     SEOEngine --> API
 ```
 
